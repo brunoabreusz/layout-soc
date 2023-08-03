@@ -1,0 +1,10 @@
+*{
+    font-size: medium;
+}
+
+input {
+    font-size: 16px; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    outline: none;
+  }
