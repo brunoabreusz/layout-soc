@@ -1,10 +1,5 @@
-*{
-    font-size: medium;
+img:hover{
+    border: 1px;
+    /* background-color: brown; */
 }
 
-input {
-    font-size: 16px; 
-    border: 2px solid #ccc; 
-    border-radius: 5px; 
-    outline: none;
-  }
