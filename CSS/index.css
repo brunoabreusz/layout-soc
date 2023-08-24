@@ -3,3 +3,7 @@ img:hover{
     /* background-color: brown; */
 }
 
+p{
+    margin: 0px;
+    padding: 0px;
+}

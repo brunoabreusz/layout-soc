@@ -13,7 +13,7 @@
 
 <body class="bg-dark">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-2">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand">
                 <img src="https://vtechti.od2.vtiger.com/test/upload/images/thumbnail_Bright_Branco.png" height="60"
@@ -27,84 +27,118 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.virustotal.com/gui/home/search">Virus Total</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://metadefender.opswat.com/">MetaDefender</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.hybrid-analysis.com/#homepage-search-string">hybrydAnalysis</a>
+                    <li class="nav-item text-light mt-2">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">VirusTotal</label>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            </div>
+                            <div class="col-auto form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox2">MetaDefender</label>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            </div>
+                            <div class="col-auto form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox3">hybrydAnalysis</label>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="input" class="form-control-sm"
+                                    placeholder="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" />
+                            </div>
+                            <div class="col-auto">
+                                <input type="submit" value="Search SHA-256" class="btn btn-outline-light btn-sm"
+                                    onclick="pesquisar()">
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <!-- <div class="container mt-3">
-        <img src=" https://www.insight.com/content/dam/insight-web/logos/partner-logos/white/branded-search/crowdstrike.png"
-        height="60" id="crd" loading="lazy" style="margin-top: -1px;" />
-        <div class="form-floating">
-    
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                style="height: 100px"></textarea>
-            <label for="floatingTextarea2">Comments</label>
+    <br><br>
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col-auto">
+                <img
+                    src="data:image/png;base64,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" />
+            </div>
+            <div class="col mt-3 input-group">
+                <textarea class="form-control" placeholder="Description: A process chain bypassed Windows logon security. 
+Customer ID: d5748e596c57494c91c79d39c2c667a3
+Host name: REDAÇÃO-6
+File name: utilman.exe
+File path: \Device\HarddiskVolume4\Windows\System32\utilman.exe
+Command line: utilman.exe /debug
+SHA 256: b99d61d874728edc0918ca0eb10eab93d381e7367e377406e65963366c874450
+MD5 Hash data: 8a2122e8162dbef04694b9c3e0b6cdee
+Full detection details: https://falcon.crowdstrike.com/activity/detections/detail/9df2fa81125e4ba7b7e8b876127068f1/98791182716?pid=837646955004
+Platform: Windows
+IP address: 187.44.143.226
+User name: NTINFOR01\REDAÇÃO-6$
+Detected: Aug. 16, 2023 10:45:21 local time, (2023-08-16 13:45:21 UTC)
+Last behavior: Aug. 16, 2023 10:45:21 local time, (2023-08-16 13:45:21 UTC)" id="textarea"></textarea>
+                <button type="button" class="btn btn-outline-danger btn-lg"
+                    onclick="preencherFormulario()">Copy</button>
+            </div>
+            <!-- <div class="col-auto mt-4">
+                    <button type="button" class="btn btn-outline-danger btn-lg">Copy</button>
+                </div> -->
         </div>
-
-        <button type="button" class="btn btn-outline-light">Light</button>
-    </div> -->
+    </div>
 
 
     <div class="container mt-3 mb-3">
         <form id="myForm" onsubmit="saveData(event)">
             <div class="mb-3">
-                <label for="descricao" class="form-label text-light">Descrição:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="descricao" name="descricao">
+                <!-- <label for="descricao" class="form-label text-light">Descrição:</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" id="descricao" name="descricao"> -->
+                <label for="formGroupExampleInput" class="form-label text-light">Descrição:</label>
+                <input type="text" class="form-control" id="descricao" name="descricao">
+
 
                 <label for="nome_host" class="form-label text-light">Nome do Host:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="nome_host" name="nome_host">
+                <input type="text" class="form-control" id="nome_host" name="nome_host">
 
                 <label for="nome_arquivo" class="form-label text-light">Nome do Arquivo:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="nome_arquivo"
-                    name="nome_arquivo">
+                <input type="text" class="form-control" id="nome_arquivo" name="nome_arquivo">
 
                 <label for="path_arquivo" class="form-label text-light">Caminho do Arquivo:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="path_arquivo"
-                    name="path_arquivo">
+                <input type="text" class="form-control" id="path_arquivo" name="path_arquivo">
 
                 <label for="path_arquivo" class="form-label text-light">SHA-256:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="sha256" name="sha256">
+                <input type="text" class="form-control" id="sha256" name="sha256">
 
                 <label for="plataforma" class="form-label text-light">Plataforma:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="plataforma" name="plataforma">
+                <input type="text" class="form-control" id="plataforma" name="plataforma">
 
                 <label for="ip" class="form-label text-light">Endereço IP:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="ip" name="ip">
+                <input type="text" class="form-control" id="ip" name="ip">
 
                 <label for="nome_user" class="form-label text-light">Nome do Usuário:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="nome_user" name="nome_user">
+                <input type="text" class="form-control" id="nome_user" name="nome_user">
 
                 <label for="detectado" class="form-label text-light">Detectado:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="detectado" name="detectado">
+                <input type="text" class="form-control" id="detectado" name="detectado">
 
                 <label for="ultimo_comportamento" class="form-label text-light">Último Comportamento:</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" id="ultimo_comportamento"
-                    name="ultimo_comportamento">
+                <input type="text" class="form-control" id="ultimo_comportamento" name="ultimo_comportamento">
             </div>
 
-            <button type="submit" data-next-page="HTML/notificaIncidente.html" class="btn btn-outline-light">Notificação
+            <button type="submit" data-next-page="HTML/notificaIncidente.html" class="btn btn-outline-light mt-1 mb-1">Notificação
                 Incidente</button>
-            <button type="submit" data-next-page="HTML/detalhaIncidente.html" class="btn btn-outline-light">Detalhamento
+            <button type="submit" data-next-page="HTML/detalhaIncidente.html" class="btn btn-outline-light mt-1 mb-1">Detalhamento
                 Incidente</button>
-            <button type="submit" data-next-page="HTML/resolveIncidente.html" class="btn btn-outline-light">Resolução
+            <button type="submit" data-next-page="HTML/resolveIncidente.html" class="btn btn-outline-light mt-1 mb-1">Resolução
                 Incidente</button>
+            <button type="submit" data-next-page="HTML/detalhaResolve.html" class="btn btn-outline-warning mt-1 mb-1">
+                Detalhamento + Resolução</button>
         </form>
 
     </div>
 
 
     <footer class="container mt-auto text-white-50">
-        <p>XSite Segurança da Informação - <a href="#" class="text-white">Team SOC</a>.</p>
+        <p>@brunoabreusz - XSite Segurança da Informação ©, <a href="#" class="text-white">Team SOC</a>.</p>
     </footer>
 
 </body>
