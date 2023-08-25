@@ -60,58 +60,116 @@ btnCopiar.addEventListener('click', () => {
 });
 
 function pesquisar() {
-    var valorDigitado = document.getElementById("input").value;
+    let valorDigitado = document.getElementById("sha256-2").value;
 
-    var virusTotalChecked = document.getElementById("inlineCheckbox1").checked;
-    var metaDefenderChecked = document.getElementById("inlineCheckbox2").checked;
-    var hybridAnalysisChecked = document.getElementById("inlineCheckbox3").checked;
+    let virusTotalChecked = document.getElementById("inlineCheckbox1").checked;
+    let metaDefenderChecked = document.getElementById("inlineCheckbox2").checked;
+    let hybridAnalysisChecked = document.getElementById("inlineCheckbox3").checked;
 
     if (virusTotalChecked) {
-        var url = "https://www.virustotal.com/gui/search/" + valorDigitado;
+        let url = "https://www.virustotal.com/gui/search/" + valorDigitado;
         window.open(url, "_blank");
     }
 
     if (metaDefenderChecked) {
-        var url2 = "https://metadefender.opswat.com/results/file/" + valorDigitado + "/hash/overview";
+        let url2 = "https://metadefender.opswat.com/results/file/" + valorDigitado + "/hash/overview";
         window.open(url2, "_blank");
     }
 
     if (hybridAnalysisChecked) {
-        var url3 = "https://www.hybrid-analysis.com/sample/" + valorDigitado;
+        let url3 = "https://www.hybrid-analysis.com/sample/" + valorDigitado;
         window.open(url3, "_blank");
     }
 }
 
-function preencherFormulario() {
-    var inputData = document.getElementById("textarea").value;
+// function preencherFormulario() {
+//     let inputData = document.getElementById("textarea").value;
 
-    var lines = inputData.split("\n");
-    var data = {};
+//     let lines = inputData.split("\n");
+//     let data = {};
+
+//     lines.forEach(function(line) {
+//         let parts = line.split(":");
+//         if (parts.length >= 2) {
+//             let key = parts[0].trim();
+//             let value = parts.slice(1).join(":").trim();
+//             data[key] = value;
+//         }
+//     });
+
+//     document.getElementById("descricao").value = data["Description"];
+//     document.getElementById("nome_host").value = data["Host name"];
+//     document.getElementById("nome_arquivo").value = data["File name"];
+//     document.getElementById("path_arquivo").value = data["File path"];
+//     document.getElementById("sha256").value = data["SHA 256"];
+//     document.getElementById("plataforma").value = data["Platform"];
+//     document.getElementById("ip").value = data["IP address"];
+//     document.getElementById("nome_user").value = data["User name"];
+
+//     if ("Detected" in data) {
+//         document.getElementById("detectado").value = data["Detected"];
+//     }
+
+//     if ("Last behavior" in data) {
+//         document.getElementById("ultimo_comportamento").value = data["Last behavior"];
+//     }
+// }
+
+
+function preencherFormulario() {
+    let inputData = document.getElementById("textarea").value;
+
+    let lines = inputData.split("\n");
+    let data = {};
 
     lines.forEach(function(line) {
-        var parts = line.split(":");
+        let parts = line.split(":");
         if (parts.length >= 2) {
-            var key = parts[0].trim();
-            var value = parts.slice(1).join(":").trim();
+            let key = parts[0].trim();
+            let value = parts.slice(1).join(":").trim();
             data[key] = value;
         }
     });
 
-    document.getElementById("descricao").value = data["Description"];
-    document.getElementById("nome_host").value = data["Host name"];
-    document.getElementById("nome_arquivo").value = data["File name"];
-    document.getElementById("path_arquivo").value = data["File path"];
-    document.getElementById("sha256").value = data["SHA 256"];
-    document.getElementById("plataforma").value = data["Platform"];
-    document.getElementById("ip").value = data["IP address"];
-    document.getElementById("nome_user").value = data["User name"];
+    let descricao = data["Description"];
+    let nomeHost = data["Host name"];
+    let nomeArquivo = data["File name"];
+    let pathArquivo = data["File path"];
+    let sha256 = data["SHA 256"];
+    let plataforma = data["Platform"];
+    let ip = data["IP address"];
+    let nomeUser = data["User name"];
+    let detectado = data["Detected"];
+    let ultimoComportamento = data["Last behavior"];
 
-    if ("Detected" in data) {
-        document.getElementById("detectado").value = data["Detected"];
-    }
+    if (
+        descricao &&
+        nomeHost &&
+        nomeArquivo &&
+        pathArquivo &&
+        sha256 &&
+        plataforma &&
+        ip &&
+        nomeUser
+    ) {
+        if (!detectado || !ultimoComportamento) {
+            alert("Detected e Last behavior devem ser preenchidos.");
+        } else {
+            document.getElementById("descricao").value = descricao;
+            document.getElementById("nome_host").value = nomeHost;
+            document.getElementById("nome_arquivo").value = nomeArquivo;
+            document.getElementById("path_arquivo").value = pathArquivo;
+            document.getElementById("sha256").value = sha256;
+            document.getElementById("sha256-2").value = sha256;
+            document.getElementById("plataforma").value = plataforma;
+            document.getElementById("ip").value = ip;
+            document.getElementById("nome_user").value = nomeUser;
+            document.getElementById("detectado").value = detectado;
+            document.getElementById("ultimo_comportamento").value = ultimoComportamento;
 
-    if ("Last behavior" in data) {
-        document.getElementById("ultimo_comportamento").value = data["Last behavior"];
+        }
+    } else {
+        alert("Todos os campos devem ser preenchidos.");
     }
 }
 
