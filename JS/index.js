@@ -61,14 +61,29 @@ btnCopiar.addEventListener('click', () => {
 
 function pesquisar() {
     let valorDigitado = document.getElementById("sha256-2").value;
+        let isIPAddress = false;
+
+    const ipPattern = /^\d+\.\d+\.\d+\.\d+$/;
+    if (ipPattern.test(valorDigitado)) {
+        isIPAddress = true;
+    }
 
     let virusTotalChecked = document.getElementById("inlineCheckbox1").checked;
     let metaDefenderChecked = document.getElementById("inlineCheckbox2").checked;
     let hybridAnalysisChecked = document.getElementById("inlineCheckbox3").checked;
 
     if (virusTotalChecked) {
-        let url = "https://www.virustotal.com/gui/search/" + valorDigitado;
-        window.open(url, "_blank");
+        if (isIPAddress) {
+            let url = "https://www.virustotal.com/gui/ip-address/" + valorDigitado;
+            window.open(url, "_blank");
+        }else if(valorDigitado.length === 64){
+            let url = "https://www.virustotal.com/gui/search/" + valorDigitado; 
+            window.open(url, "_blank");
+        }
+         else {
+            let url = "https://www.virustotal.com/gui/domain/" + valorDigitado;
+            window.open(url, "_blank");
+        }
     }
 
     if (metaDefenderChecked) {
@@ -160,7 +175,7 @@ function preencherFormulario() {
             document.getElementById("nome_arquivo").value = nomeArquivo;
             document.getElementById("path_arquivo").value = pathArquivo;
             document.getElementById("sha256").value = sha256;
-            document.getElementById("sha256-2").value = sha256;
+            // document.getElementById("sha256-2").value = sha256;
             document.getElementById("plataforma").value = plataforma;
             document.getElementById("ip").value = ip;
             document.getElementById("nome_user").value = nomeUser;
